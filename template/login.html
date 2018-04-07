@@ -45,9 +45,9 @@
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
   <script>
     $("#login-form").submit(function(e) {
+        e.preventDefault();
         var username = $("#username").val();
         var password = $("#password").val();
-        e.preventDefault();
         $.ajax({
             type: 'POST',
             url: "/api/login",
