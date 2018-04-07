@@ -1,18 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
-/*router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});*/
-
 router.post('/login', function(req, res) {
-    var con = req.con;
-    con.query('SELECT username, password FROM user WHERE username = ?',
+    var conn = req.conn;
+    conn.query('SELECT username, password FROM user WHERE username = ?',
         req.body.username, function(err, results) {
             if(err) {
               res.error(400);
             };
+            console.log(results);
             if(results[0]['password'] == req.body.password) {
                 console.log('Correct Password');
                 //Generate Session
@@ -30,10 +26,17 @@ router.post('/login', function(req, res) {
 });
 
 router.post('/register', function(req, res) {
-    var con = req.con;
-    con.query('INSERT INTO user(username, password) VALUES(?, ?)',
-        req.body.username, req.body.password function(err, results) {
-        if(err) throw err;
+    var conn = req.conn;
+    console.log('A');
+    conn.query('INSERT INTO user(username, password) VALUES('
+    +mysql.escape(req.body.username)+','
+    +mysql.escape(req.body.password)+')',
+    function(err, results) {
+        if(err) {
+            console.error(err);
+            res.error(400);
+        };
+        console.log(results);
         console.log('User Created');
         //Generate Session
         req.session.regenerate(function(err) {

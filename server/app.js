@@ -13,11 +13,16 @@ var app = express();
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+//Session
+app.use(session({
+    resave: false,
+    saveUninitialized: true,
+    secret: 'ABCDEF'
+}));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static('../template')); //path.join(__dirname, 'public')));
 
 
 
@@ -38,21 +43,14 @@ conn.connect(function(err) {
     }
 });
 
-//Session
-app.use(session({
-    resave: false,
-    saveUninitialized: true,
-    secret: 'ABCDEF'
-}));
-
-
-
 app.use('/api', function(req, res, next) {
     req.conn = conn;
     next();
-})
+});
 
 app.use('/api', api);
+
+app.use(express.static('../template')); //path.join(__dirname, 'public')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -69,7 +67,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.send('error');
 });
 
 module.exports = app;
