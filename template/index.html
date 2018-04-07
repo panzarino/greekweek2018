@@ -398,8 +398,8 @@
                 <input class="form-control" id="title" type="text" placeholder="Title" required>
               </div>
               <div class="form-group">
-                <label for="category">Category</label>
-                <select class="form-control" id="category" required>
+                <label for="type">Category</label>
+                <select class="form-control" id="type" required>
                   <option disabled="disabled" selected="selected">Choose a Category</option>
                   <option value="0">Operations</option>
                   <option value="1">Social Events</option>
@@ -432,9 +432,22 @@
     <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
-    <!-- Custom scripts for this page-->
-    <script src="js/sb-admin-datatables.min.js"></script>
-    <script src="js/sb-admin-charts.min.js"></script>
+    <script>
+      $("#post-form").submit(function(e) {
+          e.preventDefault();
+          var title = $("#title").val();
+          var type = $("#type").val();
+          var content = $("#content").val();
+          $.ajax({
+              type: 'POST',
+              url: '/api/newpost',
+              data: {'title': title, 'type': type, 'content': content},
+              success: function() {
+                  $("#postModal").modal('hide');
+              }
+          })
+      })
+    </script>
   </div>
 </body>
 
