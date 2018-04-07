@@ -18,28 +18,22 @@
 
 <body class="bg-dark">
   <div class="container">
-    <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Register an Account</div>
+    <div class="card card-login mx-auto mt-5" id="card">
+      <div class="card-header">Register</div>
       <div class="card-body">
-        <form>
+        <form id="login-form">
           <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputName">Username</label>
-                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Enter first name">
-              </div>
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputPassword1">Password</label>
-                <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Password">
-              </div>
-            </div>
+            <label for="username">Username</label>
+            <input class="form-control" id="username" type="text" placeholder="Username">
           </div>
-          <a class="btn btn-primary btn-block" href="login.html">Register</a>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input class="form-control" id="password" type="password" placeholder="Password">
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">Register</button>
         </form>
         <div class="text-center">
-          <a class="d-block small mt-3" href="login.html">Login Page</a>
+          <a class="d-block small mt-3" href="login.html">Login</a>
         </div>
       </div>
     </div>
@@ -49,6 +43,22 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script>
+    $("#login-form").submit(function(e) {
+        var username = $("#username").val();
+        var password = $("#password").val();
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: "/api/register",
+            data: {'username': username, 'password': password},
+            dataType: "json",
+            success: function(){
+                window.location.href = '/';
+            },
+        });
+    })
+  </script>
 </body>
 
 </html>
