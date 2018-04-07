@@ -13,7 +13,9 @@ CREATE TABLE user(
 
 CREATE TABLE post(
                    `id` int NOT NULL AUTO_INCREMENT,
+                   `owner` int NOT NULL,
                    `title` varchar(100) NOT NULL,
                    `content` varchar(100) NOT NULL,
+                   `type` int NOT NULL,
                    PRIMARY KEY (`id`)
                  );
