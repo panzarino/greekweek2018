@@ -182,25 +182,24 @@
       <i class="fa fa-angle-up"></i>
     </a>
     <!-- Profile Modal-->
-  <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="profile-title"></h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body" id="profile-body">
+    <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="profile-title"></h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body" id="profile-body">
 
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-<!-- logoutmodal-- >
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -310,7 +309,7 @@
               var template = `<div class="card mb-3">
                         <div class="card-body">
                           <h5 class="card-title mb-1">${post.title}</h5>
-                          <h6 class="card-title mb-1">${post.username}</h6>
+                          <h6 class="card-title mb-1"><a href="#" onclick="profilePosts(${post.owner})">${post.username}</a></h6>
                           <p class="card-text small">${type}<br>
                           ${post.content}
                           </p>
@@ -328,6 +327,7 @@
       var profilePosts = function(id) {
           profileId = id;
           $("#profile-body").html("");
+          $('#profileModal').modal('show');
           posts.forEach(function(post) {
               if (post.owner != profileId) {
                   return;
