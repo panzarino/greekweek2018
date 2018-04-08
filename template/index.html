@@ -324,6 +324,7 @@
               url: '/api/allposts',
               dataType: 'json',
               success: function(data) {
+                  $("#posts").html('');
                   data.forEach(function(post) {
                       var type = categories[post.type];
                       var template = `<div class="card mb-3">
