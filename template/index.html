@@ -320,7 +320,7 @@
 
       var getPosts = function() {
           $.ajax({
-              type: 'POST',
+              type: 'GET',
               url: '/api/allposts',
               dataType: 'json',
               success: function(data) {
