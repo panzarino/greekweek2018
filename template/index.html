@@ -81,7 +81,7 @@
                   </div>
                   <div class="mr-5">Feed</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="#" id="viewFeed">
                   <span class="float-left">View Feed</span>
                   <span class="float-right">
                     <i class="fa fa-angle-right"></i>
@@ -96,7 +96,7 @@
                   </div>
                   <div class="mr-5">Operations</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="#" id="viewOperations">
                   <span class="float-left">View Feed</span>
                   <span class="float-right">
                     <i class="fa fa-angle-right"></i>
@@ -111,7 +111,7 @@
                   </div>
                   <div class="mr-5">Social Events</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="#" id="viewSocial">
                   <span class="float-left">View Feed</span>
                   <span class="float-right">
                     <i class="fa fa-angle-right"></i>
@@ -126,7 +126,7 @@
                   </div>
                   <div class="mr-5">Student Life</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="#" id="viewLife">
                   <span class="float-left">View Feed</span>
                   <span class="float-right">
                     <i class="fa fa-angle-right"></i>
@@ -141,7 +141,7 @@
                   </div>
                   <div class="mr-5">Academics</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="#" id="viewAcademics">
                   <span class="float-left">View Feed</span>
                   <span class="float-right">
                     <i class="fa fa-angle-right"></i>
@@ -156,7 +156,7 @@
                   </div>
                   <div class="mr-5">Philanthropy</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="#" id="viewPhilanthropy">
                   <span class="float-left">View Feed</span>
                   <span class="float-right">
                     <i class="fa fa-angle-right"></i>
@@ -302,6 +302,8 @@
           'Philanthropy'
       ];
 
+      var posts = [];
+
       $("#post-form").submit(function(e) {
           e.preventDefault();
           var title = $("#title").val();
@@ -318,16 +320,13 @@
           })
       });
 
-      var getPosts = function() {
-          $.ajax({
-              type: 'GET',
-              url: '/api/allposts',
-              dataType: 'json',
-              success: function(data) {
-                  $("#posts").html('');
-                  data.forEach(function(post) {
-                      var type = categories[post.type];
-                      var template = `<div class="card mb-3">
+      var filterPosts = function() {
+          posts.forEach(function(post) {
+              if (category != -1 && post.type != category) {
+                  return;
+              }
+              var type = categories[post.type];
+              var template = `<div class="card mb-3">
                         <div class="card-body">
                           <h5 class="card-title mb-1">${post.title}</h5>
                           <h6 class="card-title mb-1">${post.username}</h6>
@@ -341,14 +340,49 @@
                             <i class="fa fa-fw fa-thumbs-up"></i>Like</a>
                         </div>
                       </div>`;
-                      $("#posts").append(template);
-                  })
+              $("#posts").append(template);
+          });
+      };
+
+      var getPosts = function() {
+          $.ajax({
+              type: 'GET',
+              url: '/api/allposts',
+              dataType: 'json',
+              success: function(data) {
+                  $("#posts").html('');
+                  posts = data;
+                  filterPosts();
               }
           })
       };
 
+      var setCategory = function (type) {
+          category = type;
+          filterPosts();
+      };
+
       $(document).ready(function() {
           getPosts();
+      });
+
+      $("#viewFeed").click(function() {
+          setCategory(-1);
+      });
+      $("#viewOperations").click(function() {
+          setCategory(0);
+      });
+      $("#viewSocial").click(function() {
+          setCategory(1);
+      });
+      $("#viewLife").click(function() {
+          setCategory(2);
+      });
+      $("#viewAcademics").click(function() {
+          setCategory(3);
+      });
+      $("#viewPhilanthropy").click(function() {
+          setCategory(4);
       });
     </script>
   </div>
