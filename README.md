@@ -1,7 +1,7 @@
 # GT Greek Connect
 Entry for the 2018 GT Greek Week Hackathon
 ## Website
-http://gtgreeklife.com
+http://www.gtgreeklife.com
 ## Description
 A tool to improve Georgia Tech's greek community by sharing information between the houses.
 Each house has an account that can make posts in sevaral different categories, including Operations, Philanthropy, etc.
