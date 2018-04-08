@@ -61,8 +61,89 @@
             <div class="card-header">
               <i class="fa fa-newspaper-o"></i> Feed</div>
             <div class="card-body">
-              <div class="card-columns" id="posts">
-
+              <div class="card-columns">
+                <!-- Example Social Card-->
+                <div class="card mb-3">
+                  <a href="#">
+                    <img class="card-img-top img-fluid w-100" src="https://www.youredm.com/wp-content/uploads/2016/12/Dimitri-Vegas-Like-Mike-Bring-The-Madness-3.5.jpg" alt="">
+                  </a>
+                  <div class="card-body">
+                    <h6 class="card-title mb-1"><a href="#">Lambda Chi Alpha</a></h6>
+                    <p class="card-text small">Social Events
+                    <p class="card-text small">Raising The Bar is an awesome and cheap party equipment rental service!
+                    </p>
+                  </div>
+                  <hr class="my-0">
+                  <div class="card-body py-2 small">
+                    <a class="mr-3 d-inline-block" href="#">
+                      <i class="fa fa-fw fa-thumbs-up"></i>Like</a>
+                    <a class="mr-3 d-inline-block" href="#">
+                      <i class="fa fa-fw fa-comment"></i>Comment</a>
+                    <a class="d-inline-block" href="#">
+                      <i class="fa fa-fw fa-share"></i>Share</a>
+                  </div>
+                  <hr class="my-0">
+                  <div class="card-body small bg-faded">
+                    <div class="media">
+                      <img class="d-flex mr-3" src="http://placehold.it/45x45" alt="">
+                      <div class="media-body">
+                        <h6 class="mt-0 mb-1"><a href="#">John Smith</a></h6>Very nice! I wish I was there! That looks amazing!
+                        <ul class="list-inline mb-0">
+                          <li class="list-inline-item">
+                            <a href="#">Like</a>
+                          </li>
+                          <li class="list-inline-item">·</li>
+                          <li class="list-inline-item">
+                            <a href="#">Reply</a>
+                          </li>
+                        </ul>
+                        <div class="media mt-3">
+                          <a class="d-flex pr-3" href="#">
+                            <img src="http://placehold.it/45x45" alt="">
+                          </a>
+                          <div class="media-body">
+                            <h6 class="mt-0 mb-1"><a href="#">David Miller</a></h6>Next time for sure!
+                            <ul class="list-inline mb-0">
+                              <li class="list-inline-item">
+                                <a href="#">Like</a>
+                              </li>
+                              <li class="list-inline-item">·</li>
+                              <li class="list-inline-item">
+                                <a href="#">Reply</a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer small text-muted">Posted 32 mins ago</div>
+                </div>
+                <!-- Example Social Card-->
+                <div class="card mb-3">
+                  <a href="#">
+                    <img class="card-img-top img-fluid w-100" src="https://unsplash.it/700/450?image=281" alt="">
+                  </a>
+                  <div class="card-body">
+                    <h6 class="card-title mb-1"><a href="#">Jeffery Wellings</a></h6>
+                    <p class="card-text small">Nice shot from the skate park!
+                      <a href="#">#kickflip</a>
+                      <a href="#">#holdmybeer</a>
+                      <a href="#">#igotthis</a>
+                    </p>
+                  </div>
+                  <hr class="my-0">
+                  <div class="card-body py-2 small">
+                    <a class="mr-3 d-inline-block" href="#">
+                      <i class="fa fa-fw fa-thumbs-up"></i>Like</a>
+                    <a class="mr-3 d-inline-block" href="#">
+                      <i class="fa fa-fw fa-comment"></i>Comment</a>
+                    <a class="d-inline-block" href="#">
+                      <i class="fa fa-fw fa-share"></i>Share</a>
+                  </div>
+                  <div class="card-footer small text-muted">Posted 1 hr ago</div>
+                </div>
+                <!-- Example Social Card-->
               </div>
               <!-- /Card Columns-->
             </div>
@@ -182,45 +263,7 @@
       <i class="fa fa-angle-up"></i>
     </a>
     <!-- Profile Modal-->
-    <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">My Profile</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <form id="post-form">
-            <div class="modal-body">
-              <div class="form-group">
-                <label for="title">Title</label>
-                <input class="form-control" id="title" type="text" placeholder="Title" required>
-              </div>
-              <div class="form-group">
-                <label for="type">Category</label>
-                <select class="form-control" id="type" required>
-                  <option disabled="disabled" selected="selected">Choose a Category</option>
-                  <option value="0">Operations</option>
-                  <option value="1">Social Events</option>
-                  <option value="2">Student Life</option>
-                  <option value="3">Academics</option>
-                  <option value="4">Philanthropy</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="content">Post Body</label>
-                <textarea class="form-control" id="content" type="text" placeholder="Post Body" rows="5" required></textarea>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-              <button class="btn btn-primary" type="submit">Post</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+
 
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -240,7 +283,7 @@
         </div>
       </div>
     </div>
-    <!-- Logout Modal-->
+    <!-- Post Modal-->
     <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -315,9 +358,8 @@
               data: {'title': title, 'type': type, 'content': content},
               success: function() {
                   $("#postModal").modal('hide');
-                  getPosts();
               }
-          })
+          });
       });
 
       var filterPosts = function() {
