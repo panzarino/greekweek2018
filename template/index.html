@@ -55,9 +55,9 @@
   <div class="content-wrapper">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-9">
+        <div class="col-lg-5 offset-lg-2">
           <!-- Example Bar Chart Card-->
-          <div class="card mb-3">
+          <div class="card">
             <div class="card-header">
               <i class="fa fa-newspaper-o"></i> Feed</div>
             <div class="card-body">
@@ -68,7 +68,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-3 offset-lg-2">
           <!-- Example Bar Chart Card-->
           <div class="card mb-3">
             <div class="card-header">
@@ -289,7 +289,7 @@
                   return;
               }
               var type = categories[post.type];
-              var template = `<div class="card mb-3">
+              var template = `<div class="card">
                         <div class="card-body">
                           <h5 class="card-title mb-1">${post.title}</h5>
                           <h6 class="card-title mb-1">${post.username}</h6>
