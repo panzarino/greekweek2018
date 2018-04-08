@@ -212,7 +212,7 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <button class="btn btn-primary" id="logout-button">Logout</button>
           </div>
         </div>
       </div>
@@ -370,10 +370,13 @@
               url: '/api/me',
               dataType: 'json',
               success: function(data) {
+                  if (typeof data.id == 'undefined') {
+                      window.location.href = '/login.html';
+                  }
                   id = data.id;
                   profileId = id;
               }
-          })
+          });
       };
 
       var setCategory = function (type) {
@@ -407,6 +410,17 @@
 
       $("#myProfile").click(function() {
           profilePosts(id);
+      });
+
+      $("#logout-button").click(function() {
+          $.ajax({
+              type: 'GET',
+              url: '/api/logout',
+              dataType: 'json',
+              success: function(data) {
+                  window.location.href = '/login.html';
+              }
+          });
       });
     </script>
   </div>
