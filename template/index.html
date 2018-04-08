@@ -262,6 +262,7 @@
     <script src="js/sb-admin.min.js"></script>
     <script>
       var category = -1;
+      var id;
 
       var categories = [
           'Operations',
@@ -326,6 +327,17 @@
           })
       };
 
+      var getID = function() {
+          $.ajax({
+              type: 'GET',
+              url: '/api/me',
+              dataType: 'json',
+              success: function(data) {
+                  id = data.id;
+              }
+          })
+      };
+
       var setCategory = function (type) {
           category = type;
           filterPosts();
@@ -333,6 +345,7 @@
 
       $(document).ready(function() {
           getPosts();
+          getID();
       });
 
       $("#viewFeed").click(function() {
