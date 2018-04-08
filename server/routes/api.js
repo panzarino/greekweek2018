@@ -5,7 +5,6 @@ var mysql = require('mysql');
 //POSTS
 
 router.post('/newpost', function(req, res) {
-    console.log()
     console.log(req.session.userid);
     var q = 'INSERT INTO post (title, content, type, owner) VALUES ('
         +mysql.escape(req.body.title)+','
@@ -16,7 +15,7 @@ router.post('/newpost', function(req, res) {
     req.conn.query(q, function (err, results) {
         if(err) {
             res.status(400);
-        };
+        }
         console.log(results);
         console.log('Post Created');
         res.send('Post Created');
@@ -37,6 +36,23 @@ router.get('/allposts', function(req, res) {
 
 //USERS
 
+router.get('/me', function(req, res) {
+    var uid = req.session.userid;
+    res.send({ id: uid });
+});
+
+router.get('/allusers', function(req, res) {
+    var q = 'SELECT id, username FROM user;';
+    req.conn.query(q, function(err, results) {
+        if(err) {
+            res.status(400);
+        }
+            res.send(results);
+    });
+});
+
+//SESSIONS
+
 router.post('/login', function(req, res) {
     console.log(req.body.username);
     var q = 'SELECT id, username, password FROM user WHERE username = '
@@ -48,7 +64,7 @@ router.post('/login', function(req, res) {
     req.conn.query(q, function(err, results) {
             if(err) {
               res.status(400);
-            };
+            }
             console.log(results);
             if(results && results[0]['password'] == req.body.password) {
                 console.log('Correct Password');
@@ -81,14 +97,14 @@ router.post('/register', function(req, res) {
         if(err) {
             console.error(err);
             res.status(400);
-        };
+        }
         console.log(results);
         console.log('User Created');
         //Generate Session
         req.session.regenerate(function(err) {
             if(err) {
               res.status(400);
-            };
+            }
             req.session.loggedIn = true;
             req.session.username = req.body.username;
             res.send("User Created");
@@ -101,7 +117,7 @@ router.get('/logout', function(req,res) {
     req.session.destroy(function(err){
         if(err) {
           res.status(400);
-        };
+        }
         res.send('Logged Out');
     });
 });
