@@ -42,7 +42,7 @@
             <i class="fa fa-fw fa-edit"></i> New Post</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#profileModal">
+          <a class="nav-link" data-toggle="modal" data-target="#profileModal" id="#myProfile">
             <i class="fa fa-fw fa-user"></i> My Profile</a>
         </li>
         <li class="nav-item">
@@ -186,11 +186,20 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Username</h5>
+          <h5 class="modal-title" id="profile-title"></h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
+        <div class="modal-body" id="profile-body">
+
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 <!-- logoutmodal-- >
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -263,6 +272,7 @@
     <script>
       var category = -1;
       var id;
+      var profileId;
 
       var categories = [
           'Operations',
@@ -315,6 +325,33 @@
           });
       };
 
+      var profilePosts = function(id) {
+          profileId = id;
+          $("#profile-body").html("");
+          posts.forEach(function(post) {
+              if (post.owner != profileId) {
+                  return;
+              }
+              var type = categories[post.type];
+              var template = `<div class="card mb-3">
+                        <div class="card-body">
+                          <h5 class="card-title mb-1">${post.title}</h5>
+                          <h6 class="card-title mb-1">${post.username}</h6>
+                          <p class="card-text small">${type}<br>
+                          ${post.content}
+                          </p>
+                        </div>
+                        <hr class="my-0">
+                        <div class="card-body py-2 small">
+                          <a class="mr-3 d-inline-block" href="#">
+                            <i class="fa fa-fw fa-thumbs-up"></i>Like</a>
+                        </div>
+                      </div>`;
+              $("#profile-body").append(template);
+              $('#profile-title').html(post.username);
+          });
+      };
+
       var getPosts = function() {
           $.ajax({
               type: 'GET',
@@ -334,6 +371,7 @@
               dataType: 'json',
               success: function(data) {
                   id = data.id;
+                  profileId = id;
               }
           })
       };
@@ -365,6 +403,10 @@
       });
       $("#viewPhilanthropy").click(function() {
           setCategory(4);
+      });
+
+      $("#myProfile").click(function() {
+          profilePosts(id);
       });
     </script>
   </div>
