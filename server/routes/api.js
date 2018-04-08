@@ -24,7 +24,9 @@ router.post('/newpost', function(req, res) {
 });
 
 router.get('/allposts', function(req, res) {
-   req.conn.query('SELECT title, content, type, owner FROM posts',
+    var q = 'SELECT p.title, p.content, p.type, p.owner, u.username FROM ' +
+        'post p inner join user u on p.owner = u.id;';
+   req.conn.query(q,
        function(err, results) {
         if(err) {
             res.status(400);
