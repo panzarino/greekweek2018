@@ -370,7 +370,7 @@
               url: '/api/me',
               dataType: 'json',
               success: function(data) {
-                  if (typeof data == 'undefined') {
+                  if (Object.keys(data).length === 0 && data.constructor === Object) {
                       window.location.href = '/login.html';
                   }
                   id = data.id;
