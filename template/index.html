@@ -62,7 +62,7 @@
               <i class="fa fa-newspaper-o"></i> Feed</div>
             <div class="card-body">
               <div class="card-columns" id="posts">
-                
+
               </div>
               <!-- /Card Columns-->
             </div>
@@ -277,11 +277,13 @@
               data: {'title': title, 'type': type, 'content': content},
               success: function() {
                   $("#postModal").modal('hide');
+                  getPosts();
               }
           });
       });
 
       var filterPosts = function() {
+          $("#posts").html('');
           posts.forEach(function(post) {
               if (category != -1 && post.type != category) {
                   return;
@@ -311,7 +313,6 @@
               url: '/api/allposts',
               dataType: 'json',
               success: function(data) {
-                  $("#posts").html('');
                   posts = data;
                   filterPosts();
               }
